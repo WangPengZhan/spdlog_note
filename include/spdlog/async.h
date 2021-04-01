@@ -34,13 +34,16 @@ static const size_t default_async_q_size = 8192;
 template<async_overflow_policy OverflowPolicy = async_overflow_policy::block>
 struct async_factory_impl
 {
+    // 参考范例
     template<typename Sink, typename... SinkArgs>
     static std::shared_ptr<async_logger> create(std::string logger_name, SinkArgs &&...args)
     {
+        // 单例
         auto &registry_inst = details::registry::instance();
 
         // create global thread pool if not already exists..
 
+        // 递归锁 构建线程池
         auto &mutex = registry_inst.tp_mutex();
         std::lock_guard<std::recursive_mutex> tp_lock(mutex);
         auto tp = registry_inst.get_tp();
@@ -50,6 +53,7 @@ struct async_factory_impl
             registry_inst.set_tp(tp);
         }
 
+        // 注册并返回同步log
         auto sink = std::make_shared<Sink>(std::forward<SinkArgs>(args)...);
         auto new_logger = std::make_shared<async_logger>(std::move(logger_name), std::move(sink), std::move(tp), OverflowPolicy);
         registry_inst.initialize_logger(new_logger);
@@ -60,6 +64,7 @@ struct async_factory_impl
 using async_factory = async_factory_impl<async_overflow_policy::block>;
 using async_factory_nonblock = async_factory_impl<async_overflow_policy::overrun_oldest>;
 
+// 包装一下创造函数 提供不同接口
 template<typename Sink, typename... SinkArgs>
 inline std::shared_ptr<spdlog::logger> create_async(std::string logger_name, SinkArgs &&...sink_args)
 {
