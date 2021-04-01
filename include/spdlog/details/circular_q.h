@@ -51,7 +51,7 @@ public:
         if (max_items_ > 0)
         {
             v_[tail_] = std::move(item);
-            tail_ = (tail_ + 1) % max_items_;
+            tail_ = (tail_ + 1) % max_items_;  // 循环队列
 
             if (tail_ == head_) // overrun last item if full
             {

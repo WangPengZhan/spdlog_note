@@ -82,7 +82,7 @@ struct async_msg : log_msg_buffer
 class SPDLOG_API thread_pool
 {
 public:
-    using item_type = async_msg;
+    using item_type = async_msg;  // 最终放入的数据
     using q_type = details::mpmc_blocking_queue<item_type>;
 
     thread_pool(size_t q_max_items, size_t threads_n, std::function<void()> on_thread_start);
@@ -91,6 +91,7 @@ public:
     // message all threads to terminate gracefully join them
     ~thread_pool();
 
+    // 不许拷贝构造和移动赋值
     thread_pool(const thread_pool &) = delete;
     thread_pool &operator=(thread_pool &&) = delete;
 
@@ -100,9 +101,9 @@ public:
     size_t queue_size();
 
 private:
-    q_type q_;
+    q_type q_; // 循环队列 带处理的数据
 
-    std::vector<std::thread> threads_;
+    std::vector<std::thread> threads_; // 处理数据的线程
 
     void post_async_msg_(async_msg &&new_msg, async_overflow_policy overflow_policy);
     void worker_loop_();

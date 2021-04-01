@@ -23,6 +23,7 @@ class logger;
 namespace details {
 class thread_pool;
 class periodic_worker;
+// 前置声明，降低编译依赖
 
 class SPDLOG_API registry
 {
@@ -83,7 +84,7 @@ public:
     // set levels for all existing/future loggers. global_level can be null if should not set.
     void set_levels(log_levels levels, level::level_enum *global_level);
 
-    static registry &instance();
+    static registry &instance();  // 单例模式
 
 private:
     registry();
@@ -92,14 +93,14 @@ private:
     void throw_if_exists_(const std::string &logger_name);
     void register_logger_(std::shared_ptr<logger> new_logger);
     bool set_level_from_cfg_(logger *logger);
-    std::mutex logger_map_mutex_, flusher_mutex_;
-    std::recursive_mutex tp_mutex_;
-    std::unordered_map<std::string, std::shared_ptr<logger>> loggers_;
+    std::mutex logger_map_mutex_, flusher_mutex_;      // 控制map 和 flusher的更新；
+    std::recursive_mutex tp_mutex_;                    // 递归锁
+    std::unordered_map<std::string, std::shared_ptr<logger>> loggers_; // 不同log的映射表
     log_levels log_levels_;
     std::unique_ptr<formatter> formatter_;
     spdlog::level::level_enum global_log_level_ = level::info;
     level::level_enum flush_level_ = level::off;
-    void (*err_handler_)(const std::string &msg) = nullptr;
+    void (*err_handler_)(const std::string &msg) = nullptr; // 函数指针：返回值为空 传入std::string
     std::shared_ptr<thread_pool> tp_;
     std::unique_ptr<periodic_worker> periodic_flusher_;
     std::shared_ptr<logger> default_logger_;

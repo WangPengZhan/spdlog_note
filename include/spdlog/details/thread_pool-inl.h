@@ -1,4 +1,4 @@
-// Copyright(c) 2015-present, Gabi Melman & spdlog contributors.
+﻿// Copyright(c) 2015-present, Gabi Melman & spdlog contributors.
 // Distributed under the MIT License (http://opensource.org/licenses/MIT)
 
 #pragma once
@@ -23,9 +23,17 @@ SPDLOG_INLINE thread_pool::thread_pool(size_t q_max_items, size_t threads_n, std
     }
     for (size_t i = 0; i < threads_n; i++)
     {
+        /* 通常使用push_back()向容器中加入一个右值元素(临时对象)时，
+         * 首先会调用构造函数构造这个临时对象，然后需要调用 拷贝构造函数或者转移构造函数 将这个临时对象放入容器中。
+         * 原来的临时变量释放。这样造成的问题就是临时变量申请资源的浪费。 
+         *
+         * push_back() 向容器尾部添加元素时，首先会创建这个元素，然后再将这个元素拷贝或者移动到容器中
+         * （如果是拷贝的话，事后会自行销毁先前创建的这个元素）；
+         * 而 emplace_back() 在实现时，则是直接在容器尾部创建这个元素，省去了拷贝或移动元素的过程。
+         */
         threads_.emplace_back([this, on_thread_start] {
             on_thread_start();
-            this->thread_pool::worker_loop_();
+            this->thread_pool::worker_loop_(); // 这里为什么要用this->thread_pool::worker_loop_(); 而不是worker_loop_()
         });
     }
 }
@@ -85,6 +93,7 @@ void SPDLOG_INLINE thread_pool::post_async_msg_(async_msg &&new_msg, async_overf
     }
 }
 
+// 处理数据循环
 void SPDLOG_INLINE thread_pool::worker_loop_()
 {
     while (process_next_msg_()) {}
