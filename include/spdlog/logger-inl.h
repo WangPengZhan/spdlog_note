@@ -15,6 +15,7 @@
 
 namespace spdlog {
 
+// 同一类型的不同对象之间互为友元
 // public methods
 SPDLOG_INLINE logger::logger(const logger &other)
     : name_(other.name_)
@@ -239,7 +240,7 @@ SPDLOG_INLINE void logger::err_handler_(const std::string &msg)
         std::lock_guard<std::mutex> lk{mutex};
         auto now = system_clock::now();
         err_counter++;
-        if (now - last_report_time < std::chrono::seconds(1))
+        if (now - last_report_time < std::chrono::seconds(1)) // ？？？
         {
             return;
         }

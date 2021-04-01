@@ -22,6 +22,16 @@ class basic_file_sink final : public base_sink<Mutex>
 public:
     explicit basic_file_sink(const filename_t &filename, bool truncate = false);
     const filename_t &filename() const;
+    /*
+    *   const 函数不同位置的意义
+    *   如果关键字const出现在*之前表示所指之物是常量，出现在*之后表示指针本身是常量
+    *   const char* const Func(const int& a) const;
+    *   (1) const 表示返回值所指之物是常量
+    *   (2) const 表示返回指针本身是常量
+    *   (3) const 表示传入参数为常量，仅对指针和引用有意义
+    *   (4) const 表示不改变类成员变量
+    *
+    */
 
 protected:
     void sink_it_(const details::log_msg &msg) override;
@@ -35,6 +45,9 @@ using basic_file_sink_mt = basic_file_sink<std::mutex>;
 using basic_file_sink_st = basic_file_sink<details::null_mutex>;
 
 } // namespace sinks
+
+// template防止歧义，采用模板类里面的模板函数时.向编译器指明时模板函数而不是成员变量
+// 可以在相应的类所在文件的namespace重载函数
 
 //
 // factory functions

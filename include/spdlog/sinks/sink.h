@@ -12,8 +12,8 @@ namespace sinks {
 class SPDLOG_API sink
 {
 public:
-    virtual ~sink() = default;
-    virtual void log(const details::log_msg &msg) = 0;
+    virtual ~sink() = default;  // = default 以将该函数声明为显示默认构造函数。这就使得编译器为显示默认函数生成了默认实现
+    virtual void log(const details::log_msg &msg) = 0; // =0 通知编译系统: “在这里声明一个虚函数，留待派生类中定义”
     virtual void flush() = 0;
     virtual void set_pattern(const std::string &pattern) = 0;
     virtual void set_formatter(std::unique_ptr<spdlog::formatter> sink_formatter) = 0;
@@ -24,7 +24,7 @@ public:
 
 protected:
     // sink log level - default is all
-    level_t level_{level::trace};
+    level_t level_{level::trace}; // 在子类中可见
 };
 
 } // namespace sinks
