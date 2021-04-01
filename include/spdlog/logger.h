@@ -24,6 +24,7 @@
 
 #include <vector>
 #ifndef SPDLOG_NO_EXCEPTIONS
+// 异常处理
 #define SPDLOG_LOGGER_CATCH()                                                                                                              \
     catch (const std::exception &ex)                                                                                                       \
     {                                                                                                                                      \
@@ -42,11 +43,22 @@ namespace spdlog {
 class SPDLOG_API logger
 {
 public:
+    // 构造函数重载
     // Empty logger
     explicit logger(std::string name)
         : name_(std::move(name))
         , sinks_()
     {}
+
+    /*
+    * std::move
+    * std::move并不能移动任何东西。
+    * 它唯一的功能是将一个左值引用强制转化为右值引用，继而可以通过右值引用使用该值，以用于移动语义。
+    * 从实现上讲，std::move基本等同于一个类型转换：static_cast<T&&>(lvalue);
+    * std::forword()
+    * 完美转发实现了参数在传递过程中保持其值属性的功能，
+    * 即若是左值，则传递之后仍然是左值，若是右值，则传递之后仍然是右值。
+    */
 
     // Logger with range on sinks
     template<typename It>
@@ -67,13 +79,24 @@ public:
 
     virtual ~logger() = default;
 
+    // 拷贝构造函数
     logger(const logger &other);
+
+    // 移动构造函数
     logger(logger &&other) SPDLOG_NOEXCEPT;
+
+    // 移动构造函数
     logger &operator=(logger other) SPDLOG_NOEXCEPT;
 
+    // 交换操作
     void swap(spdlog::logger &other) SPDLOG_NOEXCEPT;
 
+    // 全版本 转交给log_
     // FormatString is a type derived from fmt::compile_string
+    // fmt::is_compile_string<FormatString>::value // 判断是不是fmt里面可以编译的字符串
+    // true 第二个参数为int类型 默认值为 0
+    // false 第二个参数为void 发生一个编译错误
+    // 作用：控制接收数据类型
     template<typename FormatString, typename std::enable_if<fmt::is_compile_string<FormatString>::value, int>::type = 0, typename... Args>
     void log(source_loc loc, level::level_enum lvl, const FormatString &fmt, Args&&...args)
     {
@@ -87,12 +110,14 @@ public:
         log_(loc, lvl, fmt, std::forward<Args>(args)...);
     }
 
+    // 转交上方函数
     template<typename FormatString, typename... Args>
     void log(level::level_enum lvl, const FormatString &fmt, Args&&...args)
     {
         log(source_loc{}, lvl, fmt, std::forward<Args>(args)...);
     }
 
+    // 根据level不同提供不同的接口 转交给上方函数
     template<typename FormatString, typename... Args>
     void trace(const FormatString &fmt, Args&&...args)
     {
@@ -129,12 +154,14 @@ public:
         log(level::critical, fmt, std::forward<Args>(args)...);
     }
 
+    // msg T
     template<typename T>
     void log(level::level_enum lvl, const T &msg)
     {
         log(source_loc{}, lvl, msg);
     }
 
+    // std::is_convertible<> 
     // T can be statically converted to string_view and isn't a fmt::compile_string
     template<class T, typename std::enable_if<
                           std::is_convertible<const T &, spdlog::string_view_t>::value && !fmt::is_compile_string<T>::value, int>::type = 0>
@@ -321,8 +348,9 @@ protected:
     std::vector<sink_ptr> sinks_;
     spdlog::level_t level_{level::info};
     spdlog::level_t flush_level_{level::off};
-    err_handler custom_err_handler_{nullptr};
+    err_handler custom_err_handler_{nullptr}; // 异常函数
     details::backtracer tracer_;
+   
 
     // common implementation for after templated public api has been resolved
     template<typename FormatString, typename... Args>
@@ -364,3 +392,13 @@ void swap(logger &a, logger &b);
 #ifdef SPDLOG_HEADER_ONLY
 #include "logger-inl.h"
 #endif
+
+/*
+ * C++中每一个对象所占用的空间大小，是在编译的时候就确定的.
+ * 在模板类没有真正的被使用之前，编译器是无法知道，模板类中使用模板类型的对象的所占用的空间的大小的。
+ * 只有模板被真正使用的时候,比如A<int> , A<double >，编译器才知道，模板套用的是什么类型，应该分配多少空间。
+ * 套用不同类型的模板类实际上就是两个不同的类型，
+ * 也就是说，stack<int>和stack<char>是两个不同的数据类型，
+ * 他们共同的成员函数也不是同一个函数，只不过具有相似的功能罢了。
+ *
+ */
