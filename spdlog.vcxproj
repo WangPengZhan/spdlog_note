@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E87867BC-BAC9-3EB2-9290-ACDC73BE6305}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>spdlog</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\workfile\cmd\spdlog-1.x\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">spdlog.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">spdlogd</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\workfile\cmd\spdlog-1.x\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">spdlog.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">spdlog</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\workfile\cmd\spdlog-1.x\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">spdlog.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">spdlog</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\workfile\cmd\spdlog-1.x\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">spdlog.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">spdlog</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\workfile\cmd\spdlog-1.x\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;SPDLOG_COMPILED_LIB;cmd_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;SPDLOG_COMPILED_LIB;cmd_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\workfile\cmd\spdlog-1.x\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\workfile\cmd\spdlog-1.x\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\workfile\cmd\spdlog-1.x\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;SPDLOG_COMPILED_LIB;cmd_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;SPDLOG_COMPILED_LIB;cmd_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\workfile\cmd\spdlog-1.x\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\workfile\cmd\spdlog-1.x\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\workfile\cmd\spdlog-1.x\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;SPDLOG_COMPILED_LIB;cmd_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;SPDLOG_COMPILED_LIB;cmd_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\workfile\cmd\spdlog-1.x\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\workfile\cmd\spdlog-1.x\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\workfile\cmd\spdlog-1.x\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;SPDLOG_COMPILED_LIB;cmd_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;SPDLOG_COMPILED_LIB;cmd_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\workfile\cmd\spdlog-1.x\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\workfile\cmd\spdlog-1.x\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="D:\workfile\cmd\spdlog-1.x\src\spdlog.cpp" />
+    <ClCompile Include="D:\workfile\cmd\spdlog-1.x\src\stdout_sinks.cpp" />
+    <ClCompile Include="D:\workfile\cmd\spdlog-1.x\src\color_sinks.cpp" />
+    <ClCompile Include="D:\workfile\cmd\spdlog-1.x\src\file_sinks.cpp" />
+    <ClCompile Include="D:\workfile\cmd\spdlog-1.x\src\async.cpp" />
+    <ClCompile Include="D:\workfile\cmd\spdlog-1.x\src\cfg.cpp" />
+    <ClCompile Include="D:\workfile\cmd\spdlog-1.x\src\fmt.cpp" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\async.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\async_logger-inl.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\async_logger.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\common-inl.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\common.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\formatter.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\fwd.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\logger-inl.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\logger.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\pattern_formatter-inl.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\pattern_formatter.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\spdlog-inl.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\spdlog.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\tweakme.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\version.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\details\backtracer-inl.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\details\backtracer.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\details\circular_q.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\details\console_globals.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\details\file_helper-inl.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\details\file_helper.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\details\fmt_helper.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\details\log_msg-inl.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\details\log_msg.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\details\log_msg_buffer-inl.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\details\log_msg_buffer.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\details\mpmc_blocking_q.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\details\null_mutex.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\details\os-inl.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\details\os.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\details\periodic_worker-inl.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\details\periodic_worker.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\details\registry-inl.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\details\registry.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\details\synchronous_factory.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\details\tcp_client-windows.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\details\tcp_client.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\details\thread_pool-inl.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\details\thread_pool.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\details\windows_include.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\sinks\android_sink.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\sinks\ansicolor_sink-inl.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\sinks\ansicolor_sink.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\sinks\base_sink-inl.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\sinks\base_sink.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\sinks\basic_file_sink-inl.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\sinks\basic_file_sink.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\sinks\daily_file_sink.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\sinks\dist_sink.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\sinks\dup_filter_sink.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\sinks\msvc_sink.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\sinks\null_sink.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\sinks\ostream_sink.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\sinks\ringbuffer_sink.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\sinks\rotating_file_sink-inl.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\sinks\rotating_file_sink.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\sinks\sink-inl.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\sinks\sink.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\sinks\stdout_color_sinks-inl.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\sinks\stdout_color_sinks.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\sinks\stdout_sinks-inl.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\sinks\stdout_sinks.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\sinks\syslog_sink.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\sinks\systemd_sink.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\sinks\tcp_sink.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\sinks\win_eventlog_sink.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\sinks\wincolor_sink-inl.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\sinks\wincolor_sink.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\fmt\bin_to_hex.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\fmt\fmt.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\fmt\ostr.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\fmt\bundled\chrono.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\fmt\bundled\color.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\fmt\bundled\compile.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\fmt\bundled\core.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\fmt\bundled\format-inl.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\fmt\bundled\format.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\fmt\bundled\locale.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\fmt\bundled\ostream.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\fmt\bundled\posix.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\fmt\bundled\printf.h" />
+    <ClInclude Include="D:\workfile\cmd\spdlog-1.x\include\spdlog\fmt\bundled\ranges.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
