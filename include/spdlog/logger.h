@@ -334,8 +334,8 @@ public:
 
     // sinks
     const std::vector<sink_ptr> &sinks() const;
-
     std::vector<sink_ptr> &sinks();
+    // const КЏЪ§жиди
 
     // error handler
     void set_error_handler(err_handler);
