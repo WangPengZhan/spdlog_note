@@ -66,7 +66,7 @@ protected:
 class SPDLOG_API custom_flag_formatter : public details::flag_formatter
 {
 public:
-    virtual std::unique_ptr<custom_flag_formatter> clone() const = 0;
+    virtual std::unique_ptr<custom_flag_formatter> clone() const = 0;   // 这里的独占指针的作用
 
     void set_padding_info(details::padding_info padding)
     {
