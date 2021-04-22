@@ -34,7 +34,7 @@ static const size_t default_async_q_size = 8192;
 template<async_overflow_policy OverflowPolicy = async_overflow_policy::block>
 struct async_factory_impl
 {
-    // ²Î¿¼·¶Àý
+    // Òì²½²Î¿¼·¶Àý
     template<typename Sink, typename... SinkArgs>
     static std::shared_ptr<async_logger> create(std::string logger_name, SinkArgs &&...args)
     {

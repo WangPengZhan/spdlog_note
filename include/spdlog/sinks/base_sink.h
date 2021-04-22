@@ -37,7 +37,7 @@ public:
 protected:
     // sink formatter
     std::unique_ptr<spdlog::formatter> formatter_;
-    Mutex mutex_;
+    Mutex mutex_;                                                      // 为了同步多线程
 
     virtual void sink_it_(const details::log_msg &msg) = 0;
     virtual void flush_() = 0;

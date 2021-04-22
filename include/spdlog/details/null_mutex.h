@@ -6,10 +6,11 @@
 #include <atomic>
 #include <utility>
 // null, no cost dummy "mutex" and dummy "atomic" int
+// dummy 假的，傀儡，虚设
 
 namespace spdlog {
 namespace details {
-struct null_mutex
+struct null_mutex  // 为了配置异步使用
 {
     void lock() const {}
     void unlock() const {}

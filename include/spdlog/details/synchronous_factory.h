@@ -21,7 +21,7 @@ class logger;
 *   auto lambda
 */
 
-
+// 同步工厂
 struct synchronous_factory
 {
     template<typename Sink, typename... SinkArgs>

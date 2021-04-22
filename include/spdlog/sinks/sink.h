@@ -9,7 +9,7 @@
 namespace spdlog {
 
 namespace sinks {
-class SPDLOG_API sink
+class SPDLOG_API sink           // 下沉接口定义 不带锁
 {
 public:
     virtual ~sink() = default;  // = default 以将该函数声明为显示默认构造函数。这就使得编译器为显示默认函数生成了默认实现

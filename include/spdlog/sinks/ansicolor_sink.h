@@ -25,7 +25,7 @@ template<typename ConsoleMutex>
 class ansicolor_sink : public sink
 {
 public:
-    using mutex_t = typename ConsoleMutex::mutex_t;
+    using mutex_t = typename ConsoleMutex::mutex_t; // 萃取类型
     ansicolor_sink(FILE *target_file, color_mode mode);
     ~ansicolor_sink() override = default;
 
@@ -81,7 +81,7 @@ public:
 
 private:
     FILE *target_file_;
-    mutex_t &mutex_;
+    mutex_t &mutex_;                    // 保证全家只用一个锁
     bool should_do_colors_;
     std::unique_ptr<spdlog::formatter> formatter_;
     std::array<std::string, level::n_levels> colors_;
