@@ -58,7 +58,7 @@ protected:
     void backend_flush_();
 
 private:
-    std::weak_ptr<details::thread_pool> thread_pool_;
+    std::weak_ptr<details::thread_pool> thread_pool_;     // 为什么为弱指针
     async_overflow_policy overflow_policy_;
 };
 } // namespace spdlog

@@ -48,14 +48,14 @@ SPDLOG_INLINE void file_helper::open(const filename_t &fname, bool truncate)
             {
                 continue;
             }
-            std::fclose(tmp);
+            std::fclose(tmp);   // 防止内存泄露
         }
-        if (!os::fopen_s(&fd_, fname, mode))
+        if (!os::fopen_s(&fd_, fname, mode))  // 打开失败返回
         {
             return;
         }
 
-        details::os::sleep_for_millis(open_interval_);
+        details::os::sleep_for_millis(open_interval_); // 休息一段时间
     }
 
     throw_spdlog_ex("Failed opening file " + os::filename_to_str(filename_) + " for writing", errno);

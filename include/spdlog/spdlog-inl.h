@@ -12,6 +12,7 @@
 
 namespace spdlog {
 
+// spdlog默认使用register来管理所有的logger
 SPDLOG_INLINE void initialize_logger(std::shared_ptr<logger> logger)
 {
     details::registry::instance().initialize_logger(std::move(logger));

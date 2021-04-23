@@ -101,13 +101,13 @@ protected:
         bool should_rotate = time >= rotation_tp_;
         if (should_rotate)
         {
-            auto filename = FileNameCalc::calc_filename(base_filename_, now_tm(time));
+            auto filename = FileNameCalc::calc_filename(base_filename_, now_tm(time)); // 格式化名字
             file_helper_.open(filename, truncate_);
             rotation_tp_ = next_rotation_tp_();
         }
         memory_buf_t formatted;
-        base_sink<Mutex>::formatter_->format(msg, formatted);
-        file_helper_.write(formatted);
+        base_sink<Mutex>::formatter_->format(msg, formatted);      //格式化内容 // 为什么要用基类？这里不能直接访问么？？？
+        file_helper_.write(formatted);                                 
 
         // Do the cleaning only at the end because it might throw on failure.
         if (should_rotate && max_files_ > 0)
