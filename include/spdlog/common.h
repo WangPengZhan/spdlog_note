@@ -24,7 +24,7 @@
 #define SPDLOG_API __declspec(dllimport)
 #endif
 #else // !defined(_WIN32) || !defined(SPDLOG_SHARED_LIB)
-#define SPDLOG_API    // SPDLOG APIΪ���ַ���
+#define SPDLOG_API    // SPDLOG API为空字符？
 #endif
 #define SPDLOG_INLINE
 #else // !defined(SPDLOG_COMPILED_LIB)
@@ -34,22 +34,22 @@
 #endif // #ifdef SPDLOG_COMPILED_LIB
 
 /*
-*   _declspec��Microsoft VC��ר�õĹؼ��֣��������һЩ���Կ��ԶԱ�׼C/C++�������䡣
-*   __declspec�ؼ���Ӧ�ó�����������ǰ�档
+*   _declspec是Microsoft VC中专用的关键字，它配合着一些属性可以对标准C/C++进行扩充。
+*   __declspec关键字应该出现在声明的前面。
 *
-*   __declspec(dllexport)����Windows�еĶ�̬���У����������������ࡢ����ȹ�������ã�ʡ�Ը���.def�ļ���
-*   �����������������Ϊ����������������������ã���Ϊ��̬��Ķ���ӿں�������ȡ�
+*   __declspec(dllexport)用于Windows中的动态库中，声明导出函数、类、对象等供外面调用，省略给出.def文件。
+*   即将函数、类等声明为导出函数，供其它程序调用，作为动态库的对外接口函数、类等。
 
-*   .def�ļ�(ģ�鶨���ļ�)�ǰ���һ��������������DLL���Ե�Module�����ı��ļ���
-*   .def�ļ���__declspec(dllexport)���ǽ��������ŵ��뵽Ӧ�ó�����DLL����������
-*   ������ṩ__declspec(dllexport)����DLL��������DLL��Ҫ�ṩ.def�ļ���
+*   .def文件(模块定义文件)是包含一个或多个描述各种DLL属性的Module语句的文本文件。
+*   .def文件或__declspec(dllexport)都是将公共符号导入到应用程序或从DLL导出函数。
+*   如果不提供__declspec(dllexport)导出DLL函数，则DLL需要提供.def文件。
 
-*   __declspec(dllimport)����Windows�У��ӱ�Ķ�̬�����������뺯�����ࡢ����ȹ�����̬���exe�ļ�ʹ�á�
-*   ������Ҫʹ��DLL�еĺ���ʱ����������Ҫ��ʾ�ص��뺯�������������Զ���ɡ�
-*   ��ʹ��__declspec(dllimport)Ҳ����ȷ������룬��ʹ��__declspec(dllimport)ʹ�������������ɸ��õĴ��롣
-*   ������֮�����ܹ����ɸ��õĴ��룬����Ϊ������ȷ�������Ƿ������DLL�У���ʹ�ñ��������������������Ѱַ����Ĵ��룬
-*   ����Щ����ͨ��������ڿ�DLL�߽�ĺ��������С�
-*   ����һ�����뺯������˵��������Ǵӱ��DLL���롣һ������ʹ��ĳ��DLL��exe�С�
+*   __declspec(dllimport)用于Windows中，从别的动态库中声明导入函数、类、对象等供本动态库或exe文件使用。
+*   当你需要使用DLL中的函数时，往往不需要显示地导入函数，编译器可自动完成。
+*   不使用__declspec(dllimport)也能正确编译代码，但使用__declspec(dllimport)使编译器可以生成更好的代码。
+*   编译器之所以能够生成更好的代码，是因为它可以确定函数是否存在于DLL中，这使得编译器可以生成跳过间接寻址级别的代码，
+*   而这些代码通常会出现在跨DLL边界的函数调用中。
+*   声明一个导入函数，是说这个函数是从别的DLL导入。一般用于使用某个DLL的exe中。
 *
 */
 
@@ -65,7 +65,7 @@
 #endif
 
 #if defined(__GNUC__) || defined(__clang__)
-#define SPDLOG_DEPRECATED __attribute__((deprecated)) //��__attribute__((deprecated)) ������ʱ���룬ͬʱ�������ݵĽӿ�
+#define SPDLOG_DEPRECATED __attribute__((deprecated)) //用__attribute__((deprecated)) 管理过时代码，同时保留兼容的接口
 #elif defined(_MSC_VER)
 #define SPDLOG_DEPRECATED __declspec(deprecated)
 #else
@@ -73,13 +73,13 @@
 #endif
 
 /*
-*   �ڿ���һЩ���ʱ��API�Ľӿڿ��ܻ��ʱ��Ϊ�����ѿ�������������Ѿ���ʱ��
-*   �����ں�������ʱ����attribute((deprecated))���ԣ���ˣ�
-*   ֻҪ������ʹ�ã��ڱ���ʱ����������棬������Ϣ�а�����ʱ�ӿڵ����Ƽ������е�����λ�á�
+*   在开发一些库的时候，API的接口可能会过时，为了提醒开发者这个函数已经过时。
+*   可以在函数声明时加上attribute((deprecated))属性，如此，
+*   只要函数被使用，在编译时都会产生警告，警告信息中包含过时接口的名称及代码中的引用位置。
 *
-*   attribute�������ú������ԣ�Function Attribute�����������ԣ�Variable Attribute�����������ԣ�Type Attribute����
-*   attribute�﷨��ʽΪ��attribute ((attribute))
-*   ע�⣺ ʹ��attribute��ʱ��ֻ�ܺ�����������ʹ��attribute��
+*   attribute可以设置函数属性（Function Attribute）、变量属性（Variable Attribute）和类型属性（Type Attribute）。
+*   attribute语法格式为：attribute ((attribute))
+*   注意： 使用attribute的时候，只能函数的声明处使用attribute，
 */
 
 // disable thread local on msvc 2013
@@ -127,9 +127,9 @@ using filename_t = std::string;
 #endif
 
 /*
-*   �������ַ���������ʱ��#����Ҫ�����ǽ������������չ��ת�����ַ���������
-*   #���ǽ���������ַ���
-*   ## ������������
+*   当用作字符串化操作时，#的主要作用是将宏参数不经扩展地转换成字符串常量。
+*   #就是将参数变成字符串
+*   ## 则是连接作用
 */
 
 using log_clock = std::chrono::system_clock;
@@ -162,10 +162,10 @@ using level_t = std::atomic<int>;
 #endif
 
 /*
-*   C++�жԹ������ݵĴ�ȡ�ڲ��������¿��ܻ�����data race��undifined��Ϊ����Ҫ���Ʋ���������ĳ���ض���˳��ִ�У�
-*   �����ַ�ʽ��ʹ��mutex�����������ݣ�ԭ�Ӳ���.
-*   ԭ�Ӳ���:���ԭ�����Ͳ���Ҫ��һ����ɣ�Ҫô�����������ܳ��ֲ���һ�뱻�л�CPU.
-*   ������ֹ���ڶ��߳�ָ���ִ�д����Ŀ��ܴ���,��Ϊ����ԭ�Ӳ����£�ĳ���߳̿��ܿ�������һ�������̲߳���δ��ɵ����ݡ�
+*   C++中对共享数据的存取在并发条件下可能会引起data race的undifined行为，需要限制并发程序以某种特定的顺序执行，
+*   有两种方式：使用mutex保护共享数据，原子操作.
+*   原子操作:针对原子类型操作要不一步完成，要么不做，不可能出现操作一半被切换CPU.
+*   这样防止由于多线程指令交叉执行带来的可能错误,因为：非原子操作下，某个线程可能看见的是一个其它线程操作未完成的数据。
 */
 
 #define SPDLOG_LEVEL_TRACE 0
@@ -215,11 +215,11 @@ SPDLOG_API const char *to_short_c_str(spdlog::level::level_enum l) SPDLOG_NOEXCE
 SPDLOG_API spdlog::level::level_enum from_str(const std::string &name) SPDLOG_NOEXCEPT;
 
 /*
-*   ��ϣ���ø�����Χ�Ļ������͵�������������� string �����Ķ�����������ֵ�Ĺ��̡�
-*   ��ϣ������ֵ������ϣֵ���ϣ�룬����ͨ�������������У�����ȷ�����ж����λ�á�
-*   ��ǰ����˵����������������£�ÿ������Ӧ�ò���Ψһ�Ĺ�ϣֵ������һ���ǲ����ܵġ�
-*   ����ͬ��ֵ�ĸ������ڿ��ܵĹ�ϣֵ����ʱ����Ȼ�ͻ����������˵���������������������õ��ظ��Ĺ�ϣֵ��
-*   �ظ��Ĺ�ϣֵҲ������ײ��
+*   哈希是用给定范围的基本类型的数据项，或者用像 string 这样的对象，生成整数值的过程。
+*   哈希产生的值叫作哈希值或哈希码，它们通常被用在容器中，用来确定表中对象的位置。
+*   像前面所说的那样，理想情况下，每个对象应该产生唯一的哈希值，但这一般是不可能的。
+*   当不同键值的个数大于可能的哈希值个数时，显然就会出现上面所说的这种情况，我们早晚会得到重复的哈希值。
+*   重复的哈希值也叫作碰撞。
 */
 
 } // namespace level
@@ -245,7 +245,7 @@ enum class pattern_time_type
 };
 
 //
-// Log exception �쳣����
+// Log exception 异常处理
 //
 class SPDLOG_API spdlog_ex : public std::exception
 {

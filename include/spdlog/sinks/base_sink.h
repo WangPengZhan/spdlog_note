@@ -20,24 +20,24 @@ class base_sink : public sink
 {
 public:
     base_sink();
-    explicit base_sink(std::unique_ptr<spdlog::formatter> formatter);  // explicit ¹¹Ôìº¯ÊıµÄÀà£¬²»ÄÜ·¢ÉúÏàÓ¦µÄÒşÊ½ÀàĞÍ×ª»»£¬Ö»ÄÜÒÔÏÔÊ¾µÄ·½Ê½½øĞĞÀàĞÍ×ª»»
-    ~base_sink() override = default;                                   // override ¿ÉÒÔ±ÜÃâÅÉÉúÀàÖĞÍü¼ÇÖØĞ´Ğéº¯ÊıµÄ´íÎó
+    explicit base_sink(std::unique_ptr<spdlog::formatter> formatter);  // explicit æ„é€ å‡½æ•°çš„ç±»ï¼Œä¸èƒ½å‘ç”Ÿç›¸åº”çš„éšå¼ç±»å‹è½¬æ¢ï¼Œåªèƒ½ä»¥æ˜¾ç¤ºçš„æ–¹å¼è¿›è¡Œç±»å‹è½¬æ¢
+    ~base_sink() override = default;                                   // override å¯ä»¥é¿å…æ´¾ç”Ÿç±»ä¸­å¿˜è®°é‡å†™è™šå‡½æ•°çš„é”™è¯¯
 
-    base_sink(const base_sink &) = delete;                             // delete ¿ÉÔÚÏëÒª ¡°½ûÖ¹Ê¹ÓÃ¡± µÄÌØÊâ³ÉÔ±º¯ÊıÉùÃ÷ºó¼Ó ¡°= delete¡±
-    base_sink(base_sink &&) = delete;                                  // ´øÓĞÓÒÖµµÄ¹¹Ôìº¯Êı ÒÆ¶¯¹¹Ôìº¯Êı
+    base_sink(const base_sink &) = delete;                             // delete å¯åœ¨æƒ³è¦ â€œç¦æ­¢ä½¿ç”¨â€ çš„ç‰¹æ®Šæˆå‘˜å‡½æ•°å£°æ˜ååŠ  â€œ= deleteâ€
+    base_sink(base_sink &&) = delete;                                  // å¸¦æœ‰å³å€¼çš„æ„é€ å‡½æ•° ç§»åŠ¨æ„é€ å‡½æ•°
 
-    base_sink &operator=(const base_sink &) = delete;                  // ¸³Öµ¹¹Ôìº¯Êı
+    base_sink &operator=(const base_sink &) = delete;                  // èµ‹å€¼æ„é€ å‡½æ•°
     base_sink &operator=(base_sink &&) = delete;
 
-    void log(const details::log_msg &msg) final;                       // final ½ûÓÃÖØĞ´
+    void log(const details::log_msg &msg) final;                       // final ç¦ç”¨é‡å†™
     void flush() final;
-    void set_pattern(const std::string &pattern) final;                // Ïàµ±ÓÚÄ£°å·½·¨ ¼ÓËø ·½±ãÒÔºó²»ÓÃÖØ¸´
+    void set_pattern(const std::string &pattern) final;                // ç›¸å½“äºæ¨¡æ¿æ–¹æ³• åŠ é” æ–¹ä¾¿ä»¥åä¸ç”¨é‡å¤
     void set_formatter(std::unique_ptr<spdlog::formatter> sink_formatter) final;
 
 protected:
     // sink formatter
     std::unique_ptr<spdlog::formatter> formatter_;
-    Mutex mutex_;                                                      // ÎªÁËÍ¬²½¶àÏß³Ì
+    Mutex mutex_;                                                      // ä¸ºäº†åŒæ­¥å¤šçº¿ç¨‹
 
     virtual void sink_it_(const details::log_msg &msg) = 0;
     virtual void flush_() = 0;
@@ -47,7 +47,7 @@ protected:
 } // namespace sinks
 } // namespace spdlog
 
-// Ä£°åÀàµÄÉùÃ÷ºÍÊµÏÖÒª·ÅÔÚÒ»Æğ
+// æ¨¡æ¿ç±»çš„å£°æ˜å’Œå®ç°è¦æ”¾åœ¨ä¸€èµ·
 #ifdef SPDLOG_HEADER_ONLY
 #include "base_sink-inl.h"
 #endif

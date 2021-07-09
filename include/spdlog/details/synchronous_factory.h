@@ -11,17 +11,17 @@ namespace spdlog {
 class logger;
 
 /*
-*   Ê¡ÂÔºÅµÄ×÷ÓÃÓÐÁ½¸ö£º
-*   1.ÉùÃ÷Ò»¸ö²ÎÊý°üT... args£¬Õâ¸ö²ÎÊý°üÖÐ¿ÉÒÔ°üº¬0µ½ÈÎÒâ¸öÄ£°å²ÎÊý£»
-*   2.ÔÚÄ£°å¶¨ÒåµÄÓÒ±ß£¬¿ÉÒÔ½«²ÎÊý°üÕ¹¿ª³ÉÒ»¸öÒ»¸ö¶ÀÁ¢µÄ²ÎÊý¡£
-*   Õ¹¿ª¿É±äÄ£°æ²ÎÊýº¯ÊýµÄ·½·¨Ò»°ãÓÐÁ½ÖÖ£º
-*   1.Í¨¹ýµÝ¹éº¯ÊýÀ´Õ¹¿ª²ÎÊý°ü¡£ ÖÕÖ¹Ìõ¼þ£º¿Õ²ÎÊý£¬Ò»¸ö²ÎÊý¶¼¿ÉÒÔ
-*   2.Í¨¹ý¶ººÅ±í´ïÊ½À´Õ¹¿ª²ÎÊý°ü¡£
+*   çœç•¥å·çš„ä½œç”¨æœ‰ä¸¤ä¸ªï¼š
+*   1.å£°æ˜Žä¸€ä¸ªå‚æ•°åŒ…T... argsï¼Œè¿™ä¸ªå‚æ•°åŒ…ä¸­å¯ä»¥åŒ…å«0åˆ°ä»»æ„ä¸ªæ¨¡æ¿å‚æ•°ï¼›
+*   2.åœ¨æ¨¡æ¿å®šä¹‰çš„å³è¾¹ï¼Œå¯ä»¥å°†å‚æ•°åŒ…å±•å¼€æˆä¸€ä¸ªä¸€ä¸ªç‹¬ç«‹çš„å‚æ•°ã€‚
+*   å±•å¼€å¯å˜æ¨¡ç‰ˆå‚æ•°å‡½æ•°çš„æ–¹æ³•ä¸€èˆ¬æœ‰ä¸¤ç§ï¼š
+*   1.é€šè¿‡é€’å½’å‡½æ•°æ¥å±•å¼€å‚æ•°åŒ…ã€‚ ç»ˆæ­¢æ¡ä»¶ï¼šç©ºå‚æ•°ï¼Œä¸€ä¸ªå‚æ•°éƒ½å¯ä»¥
+*   2.é€šè¿‡é€—å·è¡¨è¾¾å¼æ¥å±•å¼€å‚æ•°åŒ…ã€‚
 *   https://www.cnblogs.com/qicosmos/p/4325949.html
 *   auto lambda
 */
 
-// Í¬²½¹¤³§
+// åŒæ­¥å·¥åŽ‚
 struct synchronous_factory
 {
     template<typename Sink, typename... SinkArgs>

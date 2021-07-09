@@ -9,11 +9,11 @@
 namespace spdlog {
 
 namespace sinks {
-class SPDLOG_API sink           // ÏÂ³Á½Ó¿Ú¶¨Òå ²»´øËø
+class SPDLOG_API sink           // ä¸‹æ²‰æ¥å£å®šä¹‰ ä¸å¸¦é”
 {
 public:
-    virtual ~sink() = default;  // = default ÒÔ½«¸Ãº¯ÊıÉùÃ÷ÎªÏÔÊ¾Ä¬ÈÏ¹¹Ôìº¯Êı¡£Õâ¾ÍÊ¹µÃ±àÒëÆ÷ÎªÏÔÊ¾Ä¬ÈÏº¯ÊıÉú³ÉÁËÄ¬ÈÏÊµÏÖ
-    virtual void log(const details::log_msg &msg) = 0; // =0 Í¨Öª±àÒëÏµÍ³: ¡°ÔÚÕâÀïÉùÃ÷Ò»¸öĞéº¯Êı£¬Áô´ıÅÉÉúÀàÖĞ¶¨Òå¡±
+    virtual ~sink() = default;  // = default ä»¥å°†è¯¥å‡½æ•°å£°æ˜ä¸ºæ˜¾ç¤ºé»˜è®¤æ„é€ å‡½æ•°ã€‚è¿™å°±ä½¿å¾—ç¼–è¯‘å™¨ä¸ºæ˜¾ç¤ºé»˜è®¤å‡½æ•°ç”Ÿæˆäº†é»˜è®¤å®ç°
+    virtual void log(const details::log_msg &msg) = 0; // =0 é€šçŸ¥ç¼–è¯‘ç³»ç»Ÿ: â€œåœ¨è¿™é‡Œå£°æ˜ä¸€ä¸ªè™šå‡½æ•°ï¼Œç•™å¾…æ´¾ç”Ÿç±»ä¸­å®šä¹‰â€
     virtual void flush() = 0;
     virtual void set_pattern(const std::string &pattern) = 0;
     virtual void set_formatter(std::unique_ptr<spdlog::formatter> sink_formatter) = 0;
@@ -24,7 +24,7 @@ public:
 
 protected:
     // sink log level - default is all
-    level_t level_{level::trace}; // ÔÚ×ÓÀàÖĞ¿É¼û
+    level_t level_{level::trace}; // åœ¨å­ç±»ä¸­å¯è§
 };
 
 } // namespace sinks

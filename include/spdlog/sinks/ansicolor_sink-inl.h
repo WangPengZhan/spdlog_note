@@ -16,7 +16,7 @@ namespace sinks {
 template<typename ConsoleMutex>
 SPDLOG_INLINE ansicolor_sink<ConsoleMutex>::ansicolor_sink(FILE *target_file, color_mode mode)
     : target_file_(target_file)
-    , mutex_(ConsoleMutex::mutex())             // µ¥ÀıÈ«¾ÖÖ»ÓĞÒ»¸ö¿ØÖÆÌ¨Ëø
+    , mutex_(ConsoleMutex::mutex())             // å•ä¾‹å…¨å±€åªæœ‰ä¸€ä¸ªæ§åˆ¶å°é”
     , formatter_(details::make_unique<spdlog::pattern_formatter>())
 
 {

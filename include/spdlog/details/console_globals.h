@@ -14,7 +14,7 @@ struct console_mutex
     using mutex_t = std::mutex;
     static mutex_t &mutex()
     {
-        static mutex_t s_mutex;  // Î¨Ò»Ëø
+        static mutex_t s_mutex;  // å”¯ä¸€é”
         return s_mutex;
     }
 };
@@ -24,7 +24,7 @@ struct console_nullmutex
     using mutex_t = null_mutex;
     static mutex_t &mutex()
     {
-        static mutex_t s_mutex;  // Î¨Ò»¼ÙËø
+        static mutex_t s_mutex;  // å”¯ä¸€å‡é”
         return s_mutex;
     }
 };

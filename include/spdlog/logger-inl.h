@@ -15,7 +15,7 @@
 
 namespace spdlog {
 
-// Í¬Ò»ÀàĞÍµÄ²»Í¬¶ÔÏóÖ®¼ä»¥ÎªÓÑÔª
+// åŒä¸€ç±»å‹çš„ä¸åŒå¯¹è±¡ä¹‹é—´äº’ä¸ºå‹å…ƒ
 // public methods
 SPDLOG_INLINE logger::logger(const logger &other)
     : name_(other.name_)
@@ -240,7 +240,7 @@ SPDLOG_INLINE void logger::err_handler_(const std::string &msg)
         std::lock_guard<std::mutex> lk{mutex};
         auto now = system_clock::now();
         err_counter++;
-        if (now - last_report_time < std::chrono::seconds(1)) // £¿£¿£¿
+        if (now - last_report_time < std::chrono::seconds(1)) // ï¼Ÿï¼Ÿï¼Ÿ
         {
             return;
         }

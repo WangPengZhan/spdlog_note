@@ -24,7 +24,7 @@
 
 #include <vector>
 #ifndef SPDLOG_NO_EXCEPTIONS
-// Òì³£´¦Àí
+// å¼‚å¸¸å¤„ç†
 #define SPDLOG_LOGGER_CATCH()                                                                                                              \
     catch (const std::exception &ex)                                                                                                       \
     {                                                                                                                                      \
@@ -43,7 +43,7 @@ namespace spdlog {
 class SPDLOG_API logger
 {
 public:
-    // ¹¹Ôìº¯ÊıÖØÔØ
+    // æ„é€ å‡½æ•°é‡è½½
     // Empty logger
     explicit logger(std::string name)
         : name_(std::move(name))
@@ -52,12 +52,12 @@ public:
 
     /*
     * std::move
-    * std::move²¢²»ÄÜÒÆ¶¯ÈÎºÎ¶«Î÷¡£
-    * ËüÎ¨Ò»µÄ¹¦ÄÜÊÇ½«Ò»¸ö×óÖµÒıÓÃÇ¿ÖÆ×ª»¯ÎªÓÒÖµÒıÓÃ£¬¼Ì¶ø¿ÉÒÔÍ¨¹ıÓÒÖµÒıÓÃÊ¹ÓÃ¸ÃÖµ£¬ÒÔÓÃÓÚÒÆ¶¯ÓïÒå¡£
-    * ´ÓÊµÏÖÉÏ½²£¬std::move»ù±¾µÈÍ¬ÓÚÒ»¸öÀàĞÍ×ª»»£ºstatic_cast<T&&>(lvalue);
+    * std::moveå¹¶ä¸èƒ½ç§»åŠ¨ä»»ä½•ä¸œè¥¿ã€‚
+    * å®ƒå”¯ä¸€çš„åŠŸèƒ½æ˜¯å°†ä¸€ä¸ªå·¦å€¼å¼•ç”¨å¼ºåˆ¶è½¬åŒ–ä¸ºå³å€¼å¼•ç”¨ï¼Œç»§è€Œå¯ä»¥é€šè¿‡å³å€¼å¼•ç”¨ä½¿ç”¨è¯¥å€¼ï¼Œä»¥ç”¨äºç§»åŠ¨è¯­ä¹‰ã€‚
+    * ä»å®ç°ä¸Šè®²ï¼Œstd::moveåŸºæœ¬ç­‰åŒäºä¸€ä¸ªç±»å‹è½¬æ¢ï¼šstatic_cast<T&&>(lvalue);
     * std::forword()
-    * ÍêÃÀ×ª·¢ÊµÏÖÁË²ÎÊıÔÚ´«µİ¹ı³ÌÖĞ±£³ÖÆäÖµÊôĞÔµÄ¹¦ÄÜ£¬
-    * ¼´ÈôÊÇ×óÖµ£¬Ôò´«µİÖ®ºóÈÔÈ»ÊÇ×óÖµ£¬ÈôÊÇÓÒÖµ£¬Ôò´«µİÖ®ºóÈÔÈ»ÊÇÓÒÖµ¡£
+    * å®Œç¾è½¬å‘å®ç°äº†å‚æ•°åœ¨ä¼ é€’è¿‡ç¨‹ä¸­ä¿æŒå…¶å€¼å±æ€§çš„åŠŸèƒ½ï¼Œ
+    * å³è‹¥æ˜¯å·¦å€¼ï¼Œåˆ™ä¼ é€’ä¹‹åä»ç„¶æ˜¯å·¦å€¼ï¼Œè‹¥æ˜¯å³å€¼ï¼Œåˆ™ä¼ é€’ä¹‹åä»ç„¶æ˜¯å³å€¼ã€‚
     */
 
     // Logger with range on sinks
@@ -79,24 +79,24 @@ public:
 
     virtual ~logger() = default;
 
-    // ¿½±´¹¹Ôìº¯Êı
+    // æ‹·è´æ„é€ å‡½æ•°
     logger(const logger &other);
 
-    // ÒÆ¶¯¹¹Ôìº¯Êı
+    // ç§»åŠ¨æ„é€ å‡½æ•°
     logger(logger &&other) SPDLOG_NOEXCEPT;
 
-    // ÒÆ¶¯¹¹Ôìº¯Êı
+    // ç§»åŠ¨æ„é€ å‡½æ•°
     logger &operator=(logger other) SPDLOG_NOEXCEPT;
 
-    // ½»»»²Ù×÷
+    // äº¤æ¢æ“ä½œ
     void swap(spdlog::logger &other) SPDLOG_NOEXCEPT;
 
-    // È«°æ±¾ ×ª½»¸ølog_
+    // å…¨ç‰ˆæœ¬ è½¬äº¤ç»™log_
     // FormatString is a type derived from fmt::compile_string
-    // fmt::is_compile_string<FormatString>::value // ÅĞ¶ÏÊÇ²»ÊÇfmtÀïÃæ¿ÉÒÔ±àÒëµÄ×Ö·û´®
-    // true µÚ¶ş¸ö²ÎÊıÎªintÀàĞÍ Ä¬ÈÏÖµÎª 0
-    // false µÚ¶ş¸ö²ÎÊıÎªvoid ·¢ÉúÒ»¸ö±àÒë´íÎó
-    // ×÷ÓÃ£º¿ØÖÆ½ÓÊÕÊı¾İÀàĞÍ
+    // fmt::is_compile_string<FormatString>::value // åˆ¤æ–­æ˜¯ä¸æ˜¯fmté‡Œé¢å¯ä»¥ç¼–è¯‘çš„å­—ç¬¦ä¸²
+    // true ç¬¬äºŒä¸ªå‚æ•°ä¸ºintç±»å‹ é»˜è®¤å€¼ä¸º 0
+    // false ç¬¬äºŒä¸ªå‚æ•°ä¸ºvoid å‘ç”Ÿä¸€ä¸ªç¼–è¯‘é”™è¯¯
+    // ä½œç”¨ï¼šæ§åˆ¶æ¥æ”¶æ•°æ®ç±»å‹
     template<typename FormatString, typename std::enable_if<fmt::is_compile_string<FormatString>::value, int>::type = 0, typename... Args>
     void log(source_loc loc, level::level_enum lvl, const FormatString &fmt, Args&&...args)
     {
@@ -110,14 +110,14 @@ public:
         log_(loc, lvl, fmt, std::forward<Args>(args)...);
     }
 
-    // ×ª½»ÉÏ·½º¯Êı
+    // è½¬äº¤ä¸Šæ–¹å‡½æ•°
     template<typename FormatString, typename... Args>
     void log(level::level_enum lvl, const FormatString &fmt, Args&&...args)
     {
         log(source_loc{}, lvl, fmt, std::forward<Args>(args)...);
     }
 
-    // ¸ù¾İlevel²»Í¬Ìá¹©²»Í¬µÄ½Ó¿Ú ×ª½»¸øÉÏ·½º¯Êı
+    // æ ¹æ®levelä¸åŒæä¾›ä¸åŒçš„æ¥å£ è½¬äº¤ç»™ä¸Šæ–¹å‡½æ•°
     template<typename FormatString, typename... Args>
     void trace(const FormatString &fmt, Args&&...args)
     {
@@ -335,7 +335,7 @@ public:
     // sinks
     const std::vector<sink_ptr> &sinks() const;
     std::vector<sink_ptr> &sinks();
-    // const º¯ÊıÖØÔØ
+    // const å‡½æ•°é‡è½½
 
     // error handler
     void set_error_handler(err_handler);
@@ -348,7 +348,7 @@ protected:
     std::vector<sink_ptr> sinks_;
     spdlog::level_t level_{level::info};
     spdlog::level_t flush_level_{level::off};
-    err_handler custom_err_handler_{nullptr}; // Òì³£º¯Êı
+    err_handler custom_err_handler_{nullptr}; // å¼‚å¸¸å‡½æ•°
     details::backtracer tracer_;
    
 
@@ -394,11 +394,11 @@ void swap(logger &a, logger &b);
 #endif
 
 /*
- * C++ÖĞÃ¿Ò»¸ö¶ÔÏóËùÕ¼ÓÃµÄ¿Õ¼ä´óĞ¡£¬ÊÇÔÚ±àÒëµÄÊ±ºò¾ÍÈ·¶¨µÄ.
- * ÔÚÄ£°åÀàÃ»ÓĞÕæÕıµÄ±»Ê¹ÓÃÖ®Ç°£¬±àÒëÆ÷ÊÇÎŞ·¨ÖªµÀ£¬Ä£°åÀàÖĞÊ¹ÓÃÄ£°åÀàĞÍµÄ¶ÔÏóµÄËùÕ¼ÓÃµÄ¿Õ¼äµÄ´óĞ¡µÄ¡£
- * Ö»ÓĞÄ£°å±»ÕæÕıÊ¹ÓÃµÄÊ±ºò,±ÈÈçA<int> , A<double >£¬±àÒëÆ÷²ÅÖªµÀ£¬Ä£°åÌ×ÓÃµÄÊÇÊ²Ã´ÀàĞÍ£¬Ó¦¸Ã·ÖÅä¶àÉÙ¿Õ¼ä¡£
- * Ì×ÓÃ²»Í¬ÀàĞÍµÄÄ£°åÀàÊµ¼ÊÉÏ¾ÍÊÇÁ½¸ö²»Í¬µÄÀàĞÍ£¬
- * Ò²¾ÍÊÇËµ£¬stack<int>ºÍstack<char>ÊÇÁ½¸ö²»Í¬µÄÊı¾İÀàĞÍ£¬
- * ËûÃÇ¹²Í¬µÄ³ÉÔ±º¯ÊıÒ²²»ÊÇÍ¬Ò»¸öº¯Êı£¬Ö»²»¹ı¾ßÓĞÏàËÆµÄ¹¦ÄÜ°ÕÁË¡£
+ * C++ä¸­æ¯ä¸€ä¸ªå¯¹è±¡æ‰€å ç”¨çš„ç©ºé—´å¤§å°ï¼Œæ˜¯åœ¨ç¼–è¯‘çš„æ—¶å€™å°±ç¡®å®šçš„.
+ * åœ¨æ¨¡æ¿ç±»æ²¡æœ‰çœŸæ­£çš„è¢«ä½¿ç”¨ä¹‹å‰ï¼Œç¼–è¯‘å™¨æ˜¯æ— æ³•çŸ¥é“ï¼Œæ¨¡æ¿ç±»ä¸­ä½¿ç”¨æ¨¡æ¿ç±»å‹çš„å¯¹è±¡çš„æ‰€å ç”¨çš„ç©ºé—´çš„å¤§å°çš„ã€‚
+ * åªæœ‰æ¨¡æ¿è¢«çœŸæ­£ä½¿ç”¨çš„æ—¶å€™,æ¯”å¦‚A<int> , A<double >ï¼Œç¼–è¯‘å™¨æ‰çŸ¥é“ï¼Œæ¨¡æ¿å¥—ç”¨çš„æ˜¯ä»€ä¹ˆç±»å‹ï¼Œåº”è¯¥åˆ†é…å¤šå°‘ç©ºé—´ã€‚
+ * å¥—ç”¨ä¸åŒç±»å‹çš„æ¨¡æ¿ç±»å®é™…ä¸Šå°±æ˜¯ä¸¤ä¸ªä¸åŒçš„ç±»å‹ï¼Œ
+ * ä¹Ÿå°±æ˜¯è¯´ï¼Œstack<int>å’Œstack<char>æ˜¯ä¸¤ä¸ªä¸åŒçš„æ•°æ®ç±»å‹ï¼Œ
+ * ä»–ä»¬å…±åŒçš„æˆå‘˜å‡½æ•°ä¹Ÿä¸æ˜¯åŒä¸€ä¸ªå‡½æ•°ï¼Œåªä¸è¿‡å…·æœ‰ç›¸ä¼¼çš„åŠŸèƒ½ç½¢äº†ã€‚
  *
  */

@@ -70,48 +70,48 @@ SPDLOG_INLINE void backtracer::foreach_pop(std::function<void(const details::log
 
 
 /*
-*   atomic<T> Ä£°åÀà
-*   ÆäÖĞTÊÇtrivially copyable typeÂú×ã£º
-*   1.ÒªÃ´È«²¿¶¨ÒåÁË¿½±´/ÒÆ¶¯/¸³Öµº¯Êı£¬ÒªÃ´È«²¿Ã»¶¨Òå;
-*   2.Ã»ÓĞĞé³ÉÔ±;
-*   3.»ùÀà»òÆäËüÈÎºÎ·Çstatic³ÉÔ±¶¼ÊÇtrivally copyable
-*   µäĞÍµÄÄÚÖÃÀàĞÍbool¡¢intµÈÊôÓÚtrivally copyable¡£
-*   ÔÙÈçclass triviall{public : int x};Ò²ÊÇ¡£
-*   TÄÜ¹»±»memcpy¡¢memcmpº¯ÊıÊ¹ÓÃ£¬´Ó¶øÖ§³Öcompare/exchangeÏµÁĞº¯Êı¡£
-*   ÓĞÒ»Ìõ¹æÔò£º²»ÒªÔÚ±£»¤Êı¾İÖĞÍ¨¹ıÓÃ»§×Ô¶¨ÒåÀàĞÍTÍ¨¹ı²ÎÊıÖ¸Õë»òÒıÓÃÊ¹µÃ¹²ÏíÊı¾İ³¬³ö±£»¤µÄ×÷ÓÃÓò¡£
-*   atomic<T>±àÒëÆ÷Í¨³£»áÊ¹ÓÃÒ»¸öÄÚ²¿Ëø±£»¤£¬¶øÈç¹ûÓÃ»§×Ô¶¨ÒåÀàĞÍTÍ¨¹ı²ÎÊıÖ¸Õë»òÒıÓÃ¿ÉÄÜ²úÉúËÀËø¡£×ÜÖ®ÏŞÖÆT¿ÉÒÔ¸üÀûÓÚÔ­×ÓÖ¸Áî¡£
-*   ×¢ÒâÄ³Ğ©Ô­×Ó²Ù×÷¿ÉÄÜ»áÊ§°Ü£¬±ÈÈçatomic<float>¡¢atomic<double>ÔÚcompare_exchange_strong() Ê±ºÍexpectedÏàµÈµ«ÊÇÄÚÖÃµÄÖµ±íÊ¾ĞÎÊ½²»Í¬ÓÚexpected£¬
-*   »¹ÊÇ·µ»Øfalse£¬Ã»ÓĞÔ­×ÓËãÊõ²Ù×÷Õë¶Ô¸¡µãÊı;Í¬ÀíÒ»Ğ©ÓÃ»§×Ô¶¨ÒåµÄÀàĞÍTÓÉÓÚÄÚ´æµÄ²»Í¬±íÊ¾ĞÎÊ½µ¼ÖÂmemcmpÊ§°Ü£¬´Ó¶øÊ¹µÃÒ»Ğ©ÏàµÈµÄÖµÈÔ·µ»Øfalse¡£
+*   atomic<T> æ¨¡æ¿ç±»
+*   å…¶ä¸­Tæ˜¯trivially copyable typeæ»¡è¶³ï¼š
+*   1.è¦ä¹ˆå…¨éƒ¨å®šä¹‰äº†æ‹·è´/ç§»åŠ¨/èµ‹å€¼å‡½æ•°ï¼Œè¦ä¹ˆå…¨éƒ¨æ²¡å®šä¹‰;
+*   2.æ²¡æœ‰è™šæˆå‘˜;
+*   3.åŸºç±»æˆ–å…¶å®ƒä»»ä½•éstaticæˆå‘˜éƒ½æ˜¯trivally copyable
+*   å…¸å‹çš„å†…ç½®ç±»å‹boolã€intç­‰å±äºtrivally copyableã€‚
+*   å†å¦‚class triviall{public : int x};ä¹Ÿæ˜¯ã€‚
+*   Tèƒ½å¤Ÿè¢«memcpyã€memcmpå‡½æ•°ä½¿ç”¨ï¼Œä»è€Œæ”¯æŒcompare/exchangeç³»åˆ—å‡½æ•°ã€‚
+*   æœ‰ä¸€æ¡è§„åˆ™ï¼šä¸è¦åœ¨ä¿æŠ¤æ•°æ®ä¸­é€šè¿‡ç”¨æˆ·è‡ªå®šä¹‰ç±»å‹Té€šè¿‡å‚æ•°æŒ‡é’ˆæˆ–å¼•ç”¨ä½¿å¾—å…±äº«æ•°æ®è¶…å‡ºä¿æŠ¤çš„ä½œç”¨åŸŸã€‚
+*   atomic<T>ç¼–è¯‘å™¨é€šå¸¸ä¼šä½¿ç”¨ä¸€ä¸ªå†…éƒ¨é”ä¿æŠ¤ï¼Œè€Œå¦‚æœç”¨æˆ·è‡ªå®šä¹‰ç±»å‹Té€šè¿‡å‚æ•°æŒ‡é’ˆæˆ–å¼•ç”¨å¯èƒ½äº§ç”Ÿæ­»é”ã€‚æ€»ä¹‹é™åˆ¶Tå¯ä»¥æ›´åˆ©äºåŸå­æŒ‡ä»¤ã€‚
+*   æ³¨æ„æŸäº›åŸå­æ“ä½œå¯èƒ½ä¼šå¤±è´¥ï¼Œæ¯”å¦‚atomic<float>ã€atomic<double>åœ¨compare_exchange_strong() æ—¶å’Œexpectedç›¸ç­‰ä½†æ˜¯å†…ç½®çš„å€¼è¡¨ç¤ºå½¢å¼ä¸åŒäºexpectedï¼Œ
+*   è¿˜æ˜¯è¿”å›falseï¼Œæ²¡æœ‰åŸå­ç®—æœ¯æ“ä½œé’ˆå¯¹æµ®ç‚¹æ•°;åŒç†ä¸€äº›ç”¨æˆ·è‡ªå®šä¹‰çš„ç±»å‹Tç”±äºå†…å­˜çš„ä¸åŒè¡¨ç¤ºå½¢å¼å¯¼è‡´memcmpå¤±è´¥ï¼Œä»è€Œä½¿å¾—ä¸€äº›ç›¸ç­‰çš„å€¼ä»è¿”å›falseã€‚
 
 template < class T > struct atomic {
     bool is_lock_free() const volatile;
-    //ÅĞ¶Ïatomic<T>ÖĞµÄT¶ÔÏóÊÇ·ñÎªlock freeµÄ£¬ÈôÊÇ·µ»Øtrue¡£
-    //lock free(ËøÎŞ¹Ø)Ö¸¶à¸öÏß³Ì²¢·¢·ÃÎÊT²»»á³öÏÖdata race£¬ÈÎºÎÏß³ÌÔÚÈÎºÎÊ±¿Ì¶¼¿ÉÒÔ²»ÊÜÏŞÖÆµÄ·ÃÎÊT
+    //åˆ¤æ–­atomic<T>ä¸­çš„Tå¯¹è±¡æ˜¯å¦ä¸ºlock freeçš„ï¼Œè‹¥æ˜¯è¿”å›trueã€‚
+    //lock free(é”æ— å…³)æŒ‡å¤šä¸ªçº¿ç¨‹å¹¶å‘è®¿é—®Tä¸ä¼šå‡ºç°data raceï¼Œä»»ä½•çº¿ç¨‹åœ¨ä»»ä½•æ—¶åˆ»éƒ½å¯ä»¥ä¸å—é™åˆ¶çš„è®¿é—®T
 
     bool is_lock_free() const;
-    atomic() = default;//Ä¬ÈÏ¹¹Ôìº¯Êı£¬TÎ´³õÊ¼»¯£¬¿ÉÄÜºóÃæ±»atomic_init(atomic<T>* obj,T val )º¯Êı³õÊ¼»¯
-    constexpr atomic(T val);//TÓÉval³õÊ¼»¯
-    atomic(const atomic &) = delete;//½ûÖ¹¿½±´
+    atomic() = default;//é»˜è®¤æ„é€ å‡½æ•°ï¼ŒTæœªåˆå§‹åŒ–ï¼Œå¯èƒ½åé¢è¢«atomic_init(atomic<T>* obj,T val )å‡½æ•°åˆå§‹åŒ–
+    constexpr atomic(T val);//Tç”±valåˆå§‹åŒ–
+    atomic(const atomic &) = delete;//ç¦æ­¢æ‹·è´
 
     atomic & operator=(const atomic &) = delete;
-    //atomic¶ÔÏó¼äµÄÏà»¥¸³Öµ±»½ûÖ¹£¬
-    //µ«ÊÇ¿ÉÒÔÏÔÊ¾×ª»»ÔÙ¸³Öµ£¬Èçatomic<int> a=static_cast<int>(b)ÕâÀï¼ÙÉèatomic<int> b
-    atomic & operator=(const atomic &) volatile = delete;//atomic¼ä²»ÄÜ¸³Öµ
-    T operator=(T val) volatile;//¿ÉÒÔÍ¨¹ıTÀàĞÍ¶Ôatomic¸³Öµ£¬Èç£ºatomic<int> a;a=10;
+    //atomicå¯¹è±¡é—´çš„ç›¸äº’èµ‹å€¼è¢«ç¦æ­¢ï¼Œ
+    //ä½†æ˜¯å¯ä»¥æ˜¾ç¤ºè½¬æ¢å†èµ‹å€¼ï¼Œå¦‚atomic<int> a=static_cast<int>(b)è¿™é‡Œå‡è®¾atomic<int> b
+    atomic & operator=(const atomic &) volatile = delete;//atomicé—´ä¸èƒ½èµ‹å€¼
+    T operator=(T val) volatile;//å¯ä»¥é€šè¿‡Tç±»å‹å¯¹atomicèµ‹å€¼ï¼Œå¦‚ï¼šatomic<int> a;a=10;
     T operator=(T val);
-    operator  T() const volatile;//¶ÁÈ¡±»·â×°µÄTÀàĞÍÖµ£¬ÊÇ¸öÀàĞÍ×ª»»²Ù×÷£¬Ä¬ÈÏÄÚ´æĞòÊÇmemory_order_seqĞèÒªÆäËüÄÚ´æĞòÔòµ÷ÓÃload
-    operator  T() const;//Èç£ºatomic<int> a,a==0»òÕßcout<<a<<endl¶¼Ê¹ÓÃÁËÀàĞÍ×ª»»º¯Êı
-    //ÒÔÏÂº¯Êı¿ÉÒÔÖ¸¶¨ÄÚ´æĞòmemory_order
-    T exchange(T val, memory_order = memory_order_seq_cst) volatile;//½«TµÄÖµÖÃÎªval£¬²¢·µ»ØÔ­À´TµÄÖµ
+    operator  T() const volatile;//è¯»å–è¢«å°è£…çš„Tç±»å‹å€¼ï¼Œæ˜¯ä¸ªç±»å‹è½¬æ¢æ“ä½œï¼Œé»˜è®¤å†…å­˜åºæ˜¯memory_order_seqéœ€è¦å…¶å®ƒå†…å­˜åºåˆ™è°ƒç”¨load
+    operator  T() const;//å¦‚ï¼šatomic<int> a,a==0æˆ–è€…cout<<a<<endléƒ½ä½¿ç”¨äº†ç±»å‹è½¬æ¢å‡½æ•°
+    //ä»¥ä¸‹å‡½æ•°å¯ä»¥æŒ‡å®šå†…å­˜åºmemory_order
+    T exchange(T val, memory_order = memory_order_seq_cst) volatile;//å°†Tçš„å€¼ç½®ä¸ºvalï¼Œå¹¶è¿”å›åŸæ¥Tçš„å€¼
     T exchange(T val, memory_order = memory_order_seq_cst);
-    void store(T val, memory_order = memory_order_seq_cst) volatile;//½«TÖµÉèÎªval
+    void store(T val, memory_order = memory_order_seq_cst) volatile;//å°†Tå€¼è®¾ä¸ºval
     void store(T val, memory_order = memory_order_seq_cst);
-    T load(memory_order = memory_order_seq_cst) const volatile;//·ÃÎÊTÖµ
+    T load(memory_order = memory_order_seq_cst) const volatile;//è®¿é—®Tå€¼
     T load(memory_order = memory_order_seq_cst) const;
-    bool compare_exchange_weak(T& expected, T val, memory_order = memory_order_seq_cst) volatile;//¸Ãº¯ÊıÖ±½Ó±È½ÏÔ­×Ó¶ÔÏóËù·â×°µÄÖµÓë²ÎÊı expected µÄÎïÀíÄÚÈİ£¬ËùÒÔÄ³Ğ©Çé¿öÏÂ£¬¶ÔÏóµÄ±È½Ï²Ù×÷ÔÚÊ¹ÓÃ operator==() ÅĞ¶ÏÊ±ÏàµÈ£¬µ« compare_exchange_weak ÅĞ¶ÏÊ±È´¿ÉÄÜÊ§°Ü£¬ÒòÎª¶ÔÏóµ×²ãµÄÎïÀíÄÚÈİÖĞ¿ÉÄÜ´æÔÚÎ»¶ÔÆë»òÆäËûÂß¼­±íÊ¾ÏàÍ¬µ«ÊÇÎïÀí±íÊ¾²»Í¬µÄÖµ(±ÈÈç true ºÍ 2 »ò 3£¬ËüÃÇÔÚÂß¼­ÉÏ¶¼±íÊ¾"Õæ"£¬µ«ÔÚÎïÀíÉÏÁ½ÕßµÄ±íÊ¾²¢²»ÏàÍ¬)¡£¿ÉÒÔĞé¼ÙµÄ·µ»Øfalse(ºÍexpectedÏàÍ¬)¡£Èô±¾atomicµÄTÖµºÍexpectedÏàÍ¬ÔòÓÃvalÖµÌæ»»±¾atomicµÄTÖµ£¬·µ»Øtrue;Èô²»Í¬ÔòÓÃ±¾atomicµÄTÖµÌæ»»expected£¬·µ»Øfalse¡£
+    bool compare_exchange_weak(T& expected, T val, memory_order = memory_order_seq_cst) volatile;//è¯¥å‡½æ•°ç›´æ¥æ¯”è¾ƒåŸå­å¯¹è±¡æ‰€å°è£…çš„å€¼ä¸å‚æ•° expected çš„ç‰©ç†å†…å®¹ï¼Œæ‰€ä»¥æŸäº›æƒ…å†µä¸‹ï¼Œå¯¹è±¡çš„æ¯”è¾ƒæ“ä½œåœ¨ä½¿ç”¨ operator==() åˆ¤æ–­æ—¶ç›¸ç­‰ï¼Œä½† compare_exchange_weak åˆ¤æ–­æ—¶å´å¯èƒ½å¤±è´¥ï¼Œå› ä¸ºå¯¹è±¡åº•å±‚çš„ç‰©ç†å†…å®¹ä¸­å¯èƒ½å­˜åœ¨ä½å¯¹é½æˆ–å…¶ä»–é€»è¾‘è¡¨ç¤ºç›¸åŒä½†æ˜¯ç‰©ç†è¡¨ç¤ºä¸åŒçš„å€¼(æ¯”å¦‚ true å’Œ 2 æˆ– 3ï¼Œå®ƒä»¬åœ¨é€»è¾‘ä¸Šéƒ½è¡¨ç¤º"çœŸ"ï¼Œä½†åœ¨ç‰©ç†ä¸Šä¸¤è€…çš„è¡¨ç¤ºå¹¶ä¸ç›¸åŒ)ã€‚å¯ä»¥è™šå‡çš„è¿”å›false(å’Œexpectedç›¸åŒ)ã€‚è‹¥æœ¬atomicçš„Tå€¼å’Œexpectedç›¸åŒåˆ™ç”¨valå€¼æ›¿æ¢æœ¬atomicçš„Tå€¼ï¼Œè¿”å›true;è‹¥ä¸åŒåˆ™ç”¨æœ¬atomicçš„Tå€¼æ›¿æ¢expectedï¼Œè¿”å›falseã€‚
     bool compare_exchange_weak(T &, T, memory_order = memory_order_seq_cst);
     bool compare_exchange_strong(T &, T, memory_order = memory_order_seq_cst) volatile;//
-Óëcompare_exchange_weak ²»Í¬, strong°æ±¾µÄ compare-and-exchange ²Ù×÷²»ÔÊĞí(spuriously µØ)·µ»Ø false£¬¼´Ô­×Ó¶ÔÏóËù·â×°µÄÖµÓë²ÎÊı expected µÄÎïÀíÄÚÈİÏàÍ¬£¬±È½Ï²Ù×÷Ò»¶¨»áÎª true¡£²»¹ıÔÚÄ³Ğ©Æ½Ì¨ÏÂ£¬Èç¹ûËã·¨±¾ÉíĞèÒªÑ­»·²Ù×÷À´×ö¼ì²é£¬ compare_exchange_weak µÄĞÔÄÜ»á¸üºÃ¡£Òò´Ë¶ÔÓÚÄ³Ğ©²»ĞèÒª²ÉÓÃÑ­»·²Ù×÷µÄËã·¨¶øÑÔ, Í¨³£²ÉÓÃcompare_exchange_strong ¸üºÃ
+ä¸compare_exchange_weak ä¸åŒ, strongç‰ˆæœ¬çš„ compare-and-exchange æ“ä½œä¸å…è®¸(spuriously åœ°)è¿”å› falseï¼Œå³åŸå­å¯¹è±¡æ‰€å°è£…çš„å€¼ä¸å‚æ•° expected çš„ç‰©ç†å†…å®¹ç›¸åŒï¼Œæ¯”è¾ƒæ“ä½œä¸€å®šä¼šä¸º trueã€‚ä¸è¿‡åœ¨æŸäº›å¹³å°ä¸‹ï¼Œå¦‚æœç®—æ³•æœ¬èº«éœ€è¦å¾ªç¯æ“ä½œæ¥åšæ£€æŸ¥ï¼Œ compare_exchange_weak çš„æ€§èƒ½ä¼šæ›´å¥½ã€‚å› æ­¤å¯¹äºæŸäº›ä¸éœ€è¦é‡‡ç”¨å¾ªç¯æ“ä½œçš„ç®—æ³•è€Œè¨€, é€šå¸¸é‡‡ç”¨compare_exchange_strong æ›´å¥½
     bool compare_exchange_strong(T &, T, memory_order = memory_order_seq_cst);
 };
 */

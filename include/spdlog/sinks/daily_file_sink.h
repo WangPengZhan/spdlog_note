@@ -101,12 +101,12 @@ protected:
         bool should_rotate = time >= rotation_tp_;
         if (should_rotate)
         {
-            auto filename = FileNameCalc::calc_filename(base_filename_, now_tm(time)); // ¸ñÊ½»¯Ãû×Ö
+            auto filename = FileNameCalc::calc_filename(base_filename_, now_tm(time)); // æ ¼å¼åŒ–åå­—
             file_helper_.open(filename, truncate_);
             rotation_tp_ = next_rotation_tp_();
         }
         memory_buf_t formatted;
-        base_sink<Mutex>::formatter_->format(msg, formatted);      //¸ñÊ½»¯ÄÚÈİ // ÎªÊ²Ã´ÒªÓÃ»ùÀà£¿ÕâÀï²»ÄÜÖ±½Ó·ÃÎÊÃ´£¿£¿£¿
+        base_sink<Mutex>::formatter_->format(msg, formatted);      //æ ¼å¼åŒ–å†…å®¹ // ä¸ºä»€ä¹ˆè¦ç”¨åŸºç±»ï¼Ÿè¿™é‡Œä¸èƒ½ç›´æ¥è®¿é—®ä¹ˆï¼Ÿï¼Ÿï¼Ÿ
         file_helper_.write(formatted);                                 
 
         // Do the cleaning only at the end because it might throw on failure.

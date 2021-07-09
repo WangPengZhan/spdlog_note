@@ -48,14 +48,14 @@ SPDLOG_INLINE void file_helper::open(const filename_t &fname, bool truncate)
             {
                 continue;
             }
-            std::fclose(tmp);   // ·ÀÖ¹ÄÚ´æĞ¹Â¶
+            std::fclose(tmp);   // é˜²æ­¢å†…å­˜æ³„éœ²
         }
-        if (!os::fopen_s(&fd_, fname, mode))  // ´ò¿ªÊ§°Ü·µ»Ø
+        if (!os::fopen_s(&fd_, fname, mode))  // æ‰“å¼€å¤±è´¥è¿”å›
         {
             return;
         }
 
-        details::os::sleep_for_millis(open_interval_); // ĞİÏ¢Ò»¶ÎÊ±¼ä
+        details::os::sleep_for_millis(open_interval_); // ä¼‘æ¯ä¸€æ®µæ—¶é—´
     }
 
     throw_spdlog_ex("Failed opening file " + os::filename_to_str(filename_) + " for writing", errno);

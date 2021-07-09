@@ -30,45 +30,45 @@ public:
 /*
 *  1.lock_guard
 *   (1)
-*   »¥³âÀàµÄ×îÖØÒª³ÉÔ±º¯ÊýÊÇlock()ºÍunlock()¡£
-*   ÔÚ½øÈëÁÙ½çÇøÊ±£¬Ö´ÐÐlock()¼ÓËø²Ù×÷£¬Èç¹ûÕâÊ±ÒÑ¾­±»ÆäËüÏß³ÌËø×¡£¬Ôòµ±Ç°Ïß³ÌÔÚ´ËÅÅ¶ÓµÈ´ý¡£
-*   ÍË³öÁÙ½çÇøÊ±£¬Ö´ÐÐunlock()½âËø²Ù×÷¡£
+*   äº’æ–¥ç±»çš„æœ€é‡è¦æˆå‘˜å‡½æ•°æ˜¯lock()å’Œunlock()ã€‚
+*   åœ¨è¿›å…¥ä¸´ç•ŒåŒºæ—¶ï¼Œæ‰§è¡Œlock()åŠ é”æ“ä½œï¼Œå¦‚æžœè¿™æ—¶å·²ç»è¢«å…¶å®ƒçº¿ç¨‹é”ä½ï¼Œåˆ™å½“å‰çº¿ç¨‹åœ¨æ­¤æŽ’é˜Ÿç­‰å¾…ã€‚
+*   é€€å‡ºä¸´ç•ŒåŒºæ—¶ï¼Œæ‰§è¡Œunlock()è§£é”æ“ä½œã€‚
 *   (2)
-*   ¸üºÃµÄ°ì·¨ÊÇ²ÉÓÃ¡±×ÊÔ´·ÖÅäÊ±³õÊ¼»¯¡±(RAII)·½·¨À´¼ÓËø¡¢½âËø£¬Õâ±ÜÃâÁËÔÚÁÙ½çÇøÖÐÒòÎªÅ×³öÒì³£»òreturnµÈ²Ù×÷µ¼ÖÂÃ»ÓÐ½âËø¾ÍÍË³öµÄÎÊÌâ¡£
-*   C++11µÄ±ê×¼¿âÖÐÌá¹©ÁËstd::lock_guardÀàÄ£°å×ömutexµÄRAII¡£
-*   lock_gurdµÄ¹¦ÄÜÊÇ½Ó¹ÜmutexµÄlockºÍunlockµÄ¹ÜÀíÈ¨
+*   æ›´å¥½çš„åŠžæ³•æ˜¯é‡‡ç”¨â€èµ„æºåˆ†é…æ—¶åˆå§‹åŒ–â€(RAII)æ–¹æ³•æ¥åŠ é”ã€è§£é”ï¼Œè¿™é¿å…äº†åœ¨ä¸´ç•ŒåŒºä¸­å› ä¸ºæŠ›å‡ºå¼‚å¸¸æˆ–returnç­‰æ“ä½œå¯¼è‡´æ²¡æœ‰è§£é”å°±é€€å‡ºçš„é—®é¢˜ã€‚
+*   C++11çš„æ ‡å‡†åº“ä¸­æä¾›äº†std::lock_guardç±»æ¨¡æ¿åšmutexçš„RAIIã€‚
+*   lock_gurdçš„åŠŸèƒ½æ˜¯æŽ¥ç®¡mutexçš„lockå’Œunlockçš„ç®¡ç†æƒ
 *   (3)
-*   std::lock_guardÀàµÄ¹¹Ôìº¯Êý½ûÓÃ¿½±´¹¹Ôì£¬ÇÒ½ûÓÃÒÆ¶¯¹¹Ôì¡£
-*   std::lock_guardÀà³ýÁË¹¹Ôìº¯ÊýºÍÎö¹¹º¯ÊýÍâÃ»ÓÐÆäËü³ÉÔ±º¯Êý¡£
-*   ÔÚstd::lock_guard¶ÔÏó¹¹ÔìÊ±£¬´«ÈëµÄmutex¶ÔÏó(¼´ËüËù¹ÜÀíµÄmutex¶ÔÏó)»á±»µ±Ç°Ïß³ÌËø×¡¡£
-*   ÔÚlock_guard¶ÔÏó±»Îö¹¹Ê±£¬ËüËù¹ÜÀíµÄmutex¶ÔÏó»á×Ô¶¯½âËø¡£
-*   ²»ÐèÒª³ÌÐòÔ±ÊÖ¶¯µ÷ÓÃlockºÍunlock¶Ômutex½øÐÐÉÏËøºÍ½âËø²Ù×÷¡£
-*   lock_guard¶ÔÏó²¢²»¸ºÔð¹ÜÀímutex¶ÔÏóµÄÉúÃüÖÜÆÚ£¬lock_guard¶ÔÏóÖ»ÊÇ¼ò»¯ÁËmutex¶ÔÏóµÄÉÏËøºÍ½âËø²Ù×÷£¬·½±ãÏß³Ì¶Ô»¥³âÁ¿ÉÏËø£¬
-*   ¼´ÔÚÄ³¸ölock_guard¶ÔÏóµÄÉúÃüÖÜÆÚÄÚ£¬ËüËù¹ÜÀíµÄËø¶ÔÏó»áÒ»Ö±±£³ÖÉÏËø×´Ì¬£»
-*   ¶ølock_guardµÄÉúÃüÖÜÆÚ½áÊøÖ®ºó£¬ËüËù¹ÜÀíµÄËø¶ÔÏó»á±»½âËø¡£
-*   ³ÌÐòÔ±¿ÉÒÔ·Ç³£·½±ãµØÊ¹ÓÃlock_guard£¬¶ø²»ÓÃµ£ÐÄÒì³£°²È«ÎÊÌâ¡£
-*   std::lock_guardÔÚ¹¹ÔìÊ±Ö»±»Ëø¶¨Ò»´Î£¬²¢ÇÒÔÚÏú»ÙÊ±½âËø¡£
+*   std::lock_guardç±»çš„æž„é€ å‡½æ•°ç¦ç”¨æ‹·è´æž„é€ ï¼Œä¸”ç¦ç”¨ç§»åŠ¨æž„é€ ã€‚
+*   std::lock_guardç±»é™¤äº†æž„é€ å‡½æ•°å’Œæžæž„å‡½æ•°å¤–æ²¡æœ‰å…¶å®ƒæˆå‘˜å‡½æ•°ã€‚
+*   åœ¨std::lock_guardå¯¹è±¡æž„é€ æ—¶ï¼Œä¼ å…¥çš„mutexå¯¹è±¡(å³å®ƒæ‰€ç®¡ç†çš„mutexå¯¹è±¡)ä¼šè¢«å½“å‰çº¿ç¨‹é”ä½ã€‚
+*   åœ¨lock_guardå¯¹è±¡è¢«æžæž„æ—¶ï¼Œå®ƒæ‰€ç®¡ç†çš„mutexå¯¹è±¡ä¼šè‡ªåŠ¨è§£é”ã€‚
+*   ä¸éœ€è¦ç¨‹åºå‘˜æ‰‹åŠ¨è°ƒç”¨lockå’Œunlockå¯¹mutexè¿›è¡Œä¸Šé”å’Œè§£é”æ“ä½œã€‚
+*   lock_guardå¯¹è±¡å¹¶ä¸è´Ÿè´£ç®¡ç†mutexå¯¹è±¡çš„ç”Ÿå‘½å‘¨æœŸï¼Œlock_guardå¯¹è±¡åªæ˜¯ç®€åŒ–äº†mutexå¯¹è±¡çš„ä¸Šé”å’Œè§£é”æ“ä½œï¼Œæ–¹ä¾¿çº¿ç¨‹å¯¹äº’æ–¥é‡ä¸Šé”ï¼Œ
+*   å³åœ¨æŸä¸ªlock_guardå¯¹è±¡çš„ç”Ÿå‘½å‘¨æœŸå†…ï¼Œå®ƒæ‰€ç®¡ç†çš„é”å¯¹è±¡ä¼šä¸€ç›´ä¿æŒä¸Šé”çŠ¶æ€ï¼›
+*   è€Œlock_guardçš„ç”Ÿå‘½å‘¨æœŸç»“æŸä¹‹åŽï¼Œå®ƒæ‰€ç®¡ç†çš„é”å¯¹è±¡ä¼šè¢«è§£é”ã€‚
+*   ç¨‹åºå‘˜å¯ä»¥éžå¸¸æ–¹ä¾¿åœ°ä½¿ç”¨lock_guardï¼Œè€Œä¸ç”¨æ‹…å¿ƒå¼‚å¸¸å®‰å…¨é—®é¢˜ã€‚
+*   std::lock_guardåœ¨æž„é€ æ—¶åªè¢«é”å®šä¸€æ¬¡ï¼Œå¹¶ä¸”åœ¨é”€æ¯æ—¶è§£é”ã€‚
 *
-* 2.unique_lock¡£
-*£¨1£©
-*  ËüÌá¹©ÁËlock()ºÍunlock()½Ó¿Ú£¬ÄÜ¼ÇÂ¼ÏÖÔÚ´¦ÓÚÉÏËø»¹ÊÇÃ»ÉÏËø×´Ì¬¡£
-*  ÔÚ¹¹Ôìº¯ÊýÀï³¢ÊÔ¼ÓËø£¬Èç¹ûËøÒÑ¾­±»¼ÓËø£¬Ôò×èÈû
-*  µ«ÊÇÔÚÎö¹¹µÄÊ±ºò£¬»á¸ù¾Ýµ±Ç°×´Ì¬À´¾ö¶¨ÊÇ·ñÒª½øÐÐ½âËø£¨lock_guard¾ÍÒ»¶¨»á½âËø£©¡£
-*£¨2£©
-*  std::unique_lockÀàµÄ¹¹Ôìº¯Êý½ûÓÃ¿½±´¹¹Ôì£¬µ«¿ÉÒÔÒÆ¶¯¹¹Ôì¡£
+* 2.unique_lockã€‚
+*ï¼ˆ1ï¼‰
+*  å®ƒæä¾›äº†lock()å’Œunlock()æŽ¥å£ï¼Œèƒ½è®°å½•çŽ°åœ¨å¤„äºŽä¸Šé”è¿˜æ˜¯æ²¡ä¸Šé”çŠ¶æ€ã€‚
+*  åœ¨æž„é€ å‡½æ•°é‡Œå°è¯•åŠ é”ï¼Œå¦‚æžœé”å·²ç»è¢«åŠ é”ï¼Œåˆ™é˜»å¡ž
+*  ä½†æ˜¯åœ¨æžæž„çš„æ—¶å€™ï¼Œä¼šæ ¹æ®å½“å‰çŠ¶æ€æ¥å†³å®šæ˜¯å¦è¦è¿›è¡Œè§£é”ï¼ˆlock_guardå°±ä¸€å®šä¼šè§£é”ï¼‰ã€‚
+*ï¼ˆ2ï¼‰
+*  std::unique_lockç±»çš„æž„é€ å‡½æ•°ç¦ç”¨æ‹·è´æž„é€ ï¼Œä½†å¯ä»¥ç§»åŠ¨æž„é€ ã€‚
 *
-* lock_gurdµÄµÚ¶þ²ÎÊý
-* eg£ºstd::lock_guard<std::mutex> sbguard1(my_mutex1, std::adopt_lock);
+* lock_gurdçš„ç¬¬äºŒå‚æ•°
+* egï¼šstd::lock_guard<std::mutex> sbguard1(my_mutex1, std::adopt_lock);
 *  (1)  std::adopt_lock
-        ×÷ÓÃ£º±íÊ¾Õâ¸ö»¥³âÁ¿ÒÑ¾­±»lockÁË£¨Äã±ØÐëÒª°Ñ»¥³âÁ¿ÌáÇ°lockÁË £¬·ñÕß»á±¨Òì³££©£»
-        Ô­Àí£ºstd::adopt_lock±ê¼ÇµÄÐ§¹û¾ÍÊÇ¼ÙÉèµ÷ÓÃÒ»·½ÒÑ¾­ÓµÓÐÁË»¥³âÁ¿µÄËùÓÐÈ¨£¨ÒÑ¾­lock³É¹¦ÁË£©£»
-            Í¨Öªlock_guard²»ÐèÒªÔÙ¹¹Ôìº¯ÊýÖÐlockÕâ¸ö»¥³âÁ¿ÁË¡£
+        ä½œç”¨ï¼šè¡¨ç¤ºè¿™ä¸ªäº’æ–¥é‡å·²ç»è¢«lockäº†ï¼ˆä½ å¿…é¡»è¦æŠŠäº’æ–¥é‡æå‰lockäº† ï¼Œå¦è€…ä¼šæŠ¥å¼‚å¸¸ï¼‰ï¼›
+        åŽŸç†ï¼šstd::adopt_lockæ ‡è®°çš„æ•ˆæžœå°±æ˜¯å‡è®¾è°ƒç”¨ä¸€æ–¹å·²ç»æ‹¥æœ‰äº†äº’æ–¥é‡çš„æ‰€æœ‰æƒï¼ˆå·²ç»lockæˆåŠŸäº†ï¼‰ï¼›
+            é€šçŸ¥lock_guardä¸éœ€è¦å†æž„é€ å‡½æ•°ä¸­lockè¿™ä¸ªäº’æ–¥é‡äº†ã€‚
 
 
-* £¨2£© std::try_to_lock
-        ×÷ÓÃ£º³¢ÊÔÓÃmutexµÄlock()È¥Ëø¶¨Õâ¸ömutex,µ«Èç¹ûÃ»ÓÐËø¶¨³É¹¦£¬ÎÒÒ²»áÁ¢¼´·µ»Ø£¬²¢²»»á×èÈûÔÚÄÇÀï£»
+* ï¼ˆ2ï¼‰ std::try_to_lock
+        ä½œç”¨ï¼šå°è¯•ç”¨mutexçš„lock()åŽ»é”å®šè¿™ä¸ªmutex,ä½†å¦‚æžœæ²¡æœ‰é”å®šæˆåŠŸï¼Œæˆ‘ä¹Ÿä¼šç«‹å³è¿”å›žï¼Œå¹¶ä¸ä¼šé˜»å¡žåœ¨é‚£é‡Œï¼›
 
-* £¨3£© std::defer_lock
+* ï¼ˆ3ï¼‰ std::defer_lock
 *
 */
 
@@ -76,24 +76,24 @@ public:
     // try to enqueue and block if no room left
     void enqueue(T &&item)
     {
-        // 1. Ã»ÓÐÄÃµ½Ëø
-        //      µÈ´ýËøÊÍ·Å
-        // 2. ÄÃµ½Ëø
+        // 1. æ²¡æœ‰æ‹¿åˆ°é”
+        //      ç­‰å¾…é”é‡Šæ”¾
+        // 2. æ‹¿åˆ°é”
         //     wait
-        //    (1) ¼ì²éÌõ¼þÊÇ·ñ³ÉÁ¢
-        //       ³ÉÁ¢´¦ÀíÊý¾Ý
-        //       ²»³ÉÁ¢£¬ÊÍ·ÅËø£¬Ïß³ÌË¯Ãß µÈ´ý»½ÐÑ
-        //    (2) »½ÐÑ
-        //        Ïß³ÌÕýÔÚÖ´ÐÐÆäËûÈÎÎñ ²»Æð×÷ÓÃ
-        //        µÈ´ýÏß³Ì ³¢ÊÔÖØÐÂ»ñµÃËø Ö´ÐÐ½ÓÏÂÀ´µÄÈÎÎñ
+        //    (1) æ£€æŸ¥æ¡ä»¶æ˜¯å¦æˆç«‹
+        //       æˆç«‹å¤„ç†æ•°æ®
+        //       ä¸æˆç«‹ï¼Œé‡Šæ”¾é”ï¼Œçº¿ç¨‹ç¡çœ  ç­‰å¾…å”¤é†’
+        //    (2) å”¤é†’
+        //        çº¿ç¨‹æ­£åœ¨æ‰§è¡Œå…¶ä»–ä»»åŠ¡ ä¸èµ·ä½œç”¨
+        //        ç­‰å¾…çº¿ç¨‹ å°è¯•é‡æ–°èŽ·å¾—é” æ‰§è¡ŒæŽ¥ä¸‹æ¥çš„ä»»åŠ¡
         {
             std::unique_lock<std::mutex> lock(queue_mutex_);
             pop_cv_.wait(lock, [this] { return !this->q_.full(); });
             q_.push_back(std::move(item));
         }
 
-        // condition_variable ÈÝÐí wait ¡¢ wait_for ¡¢ wait_until ¡¢ notify_one ¼° notify_all ³ÉÔ±º¯ÊýµÄÍ¬Ê±µ÷ÓÃ¡£
-        // Í¨Öª×¼±¸ºÃµÄÊý¾Ý ²»ÐèÒªÎªÍ¨ÖªÉÏËø
+        // condition_variable å®¹è®¸ wait ã€ wait_for ã€ wait_until ã€ notify_one åŠ notify_all æˆå‘˜å‡½æ•°çš„åŒæ—¶è°ƒç”¨ã€‚
+        // é€šçŸ¥å‡†å¤‡å¥½çš„æ•°æ® ä¸éœ€è¦ä¸ºé€šçŸ¥ä¸Šé”
         push_cv_.notify_one();
     }
 

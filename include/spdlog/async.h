@@ -34,16 +34,16 @@ static const size_t default_async_q_size = 8192;
 template<async_overflow_policy OverflowPolicy = async_overflow_policy::block>
 struct async_factory_impl
 {
-    // Òì²½²Î¿¼·¶Àı
+    // å¼‚æ­¥å‚è€ƒèŒƒä¾‹
     template<typename Sink, typename... SinkArgs>
     static std::shared_ptr<async_logger> create(std::string logger_name, SinkArgs &&...args)
     {
-        // µ¥Àı
+        // å•ä¾‹
         auto &registry_inst = details::registry::instance();
 
         // create global thread pool if not already exists..
 
-        // µİ¹éËø ¹¹½¨Ïß³Ì³Ø
+        // é€’å½’é” æ„å»ºçº¿ç¨‹æ± 
         auto &mutex = registry_inst.tp_mutex();
         std::lock_guard<std::recursive_mutex> tp_lock(mutex);
         auto tp = registry_inst.get_tp();
@@ -53,7 +53,7 @@ struct async_factory_impl
             registry_inst.set_tp(tp);
         }
 
-        // ×¢²á²¢·µ»ØÍ¬²½log
+        // æ³¨å†Œå¹¶è¿”å›åŒæ­¥log
         auto sink = std::make_shared<Sink>(std::forward<SinkArgs>(args)...);
         auto new_logger = std::make_shared<async_logger>(std::move(logger_name), std::move(sink), std::move(tp), OverflowPolicy);
         registry_inst.initialize_logger(new_logger);
@@ -64,7 +64,7 @@ struct async_factory_impl
 using async_factory = async_factory_impl<async_overflow_policy::block>;
 using async_factory_nonblock = async_factory_impl<async_overflow_policy::overrun_oldest>;
 
-// °ü×°Ò»ÏÂ´´Ôìº¯Êı Ìá¹©²»Í¬½Ó¿Ú
+// åŒ…è£…ä¸€ä¸‹åˆ›é€ å‡½æ•° æä¾›ä¸åŒæ¥å£
 template<typename Sink, typename... SinkArgs>
 inline std::shared_ptr<spdlog::logger> create_async(std::string logger_name, SinkArgs &&...sink_args)
 {

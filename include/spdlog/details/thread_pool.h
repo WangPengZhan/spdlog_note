@@ -82,7 +82,7 @@ struct async_msg : log_msg_buffer
 class SPDLOG_API thread_pool
 {
 public:
-    using item_type = async_msg;  // ×îÖÕ·ÅÈëµÄÊı¾İ
+    using item_type = async_msg;  // æœ€ç»ˆæ”¾å…¥çš„æ•°æ®
     using q_type = details::mpmc_blocking_queue<item_type>;
 
     thread_pool(size_t q_max_items, size_t threads_n, std::function<void()> on_thread_start);
@@ -91,7 +91,7 @@ public:
     // message all threads to terminate gracefully join them
     ~thread_pool();
 
-    // ²»Ğí¿½±´¹¹ÔìºÍÒÆ¶¯¸³Öµ
+    // ä¸è®¸æ‹·è´æ„é€ å’Œç§»åŠ¨èµ‹å€¼
     thread_pool(const thread_pool &) = delete;
     thread_pool &operator=(thread_pool &&) = delete;
 
@@ -101,9 +101,9 @@ public:
     size_t queue_size();
 
 private:
-    q_type q_; // Ñ­»·¶ÓÁĞ ´ø´¦ÀíµÄÊı¾İ
+    q_type q_; // å¾ªç¯é˜Ÿåˆ— å¸¦å¤„ç†çš„æ•°æ®
 
-    std::vector<std::thread> threads_; // ´¦ÀíÊı¾İµÄÏß³Ì
+    std::vector<std::thread> threads_; // å¤„ç†æ•°æ®çš„çº¿ç¨‹
 
     void post_async_msg_(async_msg &&new_msg, async_overflow_policy overflow_policy);
     void worker_loop_();

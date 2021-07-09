@@ -23,7 +23,7 @@ class logger;
 namespace details {
 class thread_pool;
 class periodic_worker;
-// Ç°ÖÃÉùÃ÷£¬½µµÍ±àÒëÒÀÀµ
+// å‰ç½®å£°æ˜ï¼Œé™ä½ç¼–è¯‘ä¾èµ–
 
 class SPDLOG_API registry
 {
@@ -84,7 +84,7 @@ public:
     // set levels for all existing/future loggers. global_level can be null if should not set.
     void set_levels(log_levels levels, level::level_enum *global_level);
 
-    static registry &instance();  // µ¥ÀıÄ£Ê½
+    static registry &instance();  // å•ä¾‹æ¨¡å¼
 
 private:
     registry();
@@ -93,14 +93,14 @@ private:
     void throw_if_exists_(const std::string &logger_name);
     void register_logger_(std::shared_ptr<logger> new_logger);
     bool set_level_from_cfg_(logger *logger);
-    std::mutex logger_map_mutex_, flusher_mutex_;      // ¿ØÖÆmap ºÍ flusherµÄ¸üĞÂ£»
-    std::recursive_mutex tp_mutex_;                    // µİ¹éËø
-    std::unordered_map<std::string, std::shared_ptr<logger>> loggers_; // ²»Í¬logµÄÓ³Éä±í
+    std::mutex logger_map_mutex_, flusher_mutex_;      // æ§åˆ¶map å’Œ flusherçš„æ›´æ–°ï¼›
+    std::recursive_mutex tp_mutex_;                    // é€’å½’é”
+    std::unordered_map<std::string, std::shared_ptr<logger>> loggers_; // ä¸åŒlogçš„æ˜ å°„è¡¨
     log_levels log_levels_;
     std::unique_ptr<formatter> formatter_;
     spdlog::level::level_enum global_log_level_ = level::info;
     level::level_enum flush_level_ = level::off;
-    void (*err_handler_)(const std::string &msg) = nullptr; // º¯ÊıÖ¸Õë£º·µ»ØÖµÎª¿Õ ´«Èëstd::string
+    void (*err_handler_)(const std::string &msg) = nullptr; // å‡½æ•°æŒ‡é’ˆï¼šè¿”å›å€¼ä¸ºç©º ä¼ å…¥std::string
     std::shared_ptr<thread_pool> tp_;
     std::unique_ptr<periodic_worker> periodic_flusher_;
     std::shared_ptr<logger> default_logger_;
